@@ -1,0 +1,12 @@
+replicaCount: 2
+
+image:
+  repository: kedjah07/myapp
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5000
+
+resources: {}
