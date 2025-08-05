@@ -1,5 +1,7 @@
 name: Helm Charts CI
 
+permissions:
+    contents: read  # ✅ restricts workflow to read-only
 on:
   push:
     branches:

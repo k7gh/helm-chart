@@ -37,11 +37,13 @@ readinessProbe:
 securityContext:
   readOnlyRootFilesystem: true
   runAsNonRoot: true
-  runAsUser: 1000
+  runAsUser: 10000      # ✅ Higher UID
+  fsGroup: 2000         # ✅ Ensures mounted volumes have correct permissions
   allowPrivilegeEscalation: false
   capabilities:
     drop:
       - ALL
+
 
 networkPolicy:
   enabled: true
