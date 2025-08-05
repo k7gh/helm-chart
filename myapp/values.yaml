@@ -1,12 +1,48 @@
+namespace: myapp-namespace
+
 replicaCount: 2
 
 image:
   repository: kedjah07/myapp
-  tag: latest
+  tag: "v1.0.0"
+  digest: "sha256:18da2ac6a67a587e76caff705de6c888c5f391004e86fdd152ae25dab8cdd433"  # Replace with actual digest
   pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
   port: 5000
 
-resources: {}
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: 5000
+  initialDelaySeconds: 10
+  periodSeconds: 30
+
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 5000
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+securityContext:
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+networkPolicy:
+  enabled: true
+

@@ -1,6 +1,7 @@
 apiVersion: v2
 name: myapp
-description: A Helm chart for deploying my echo server
+description: A secure Kubernetes deployment for myapp
 type: application
 version: 0.1.0
-appVersion: "latest"
+appVersion: "1.0.0"
+
